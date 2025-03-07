@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click inventory</title>
+</head>
+<link rel="stylesheet" href="./css/index.css">
+<body>
+
+    <main class="main" id="main"></main>
+    <div id="hotbar"></div>
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const main = document.getElementById("main");
+for(let i = 0; i < 54; i++) {
+    const clickButton = document.createElement("button");
+    clickButton.id = i;
+    clickButton.className = "click";
+    clickButton.textContent = `${i}`;
+        main.appendChild(clickButton);
+    clickButton.addEventListener("click", () => {
+        socket.emit("clickSlot", i);
+    });
+}
+
+for(let i = 0; i < 9; i++) {
+    const hotbar = document.getElementById('hotbar');
+    const hotbarSlot = document.createElement('button');
+    hotbarSlot.id = i;
+    hotbarSlot.className = "slot";
+    hotbarSlot.textContent = `${i}`;
+    hotbar.appendChild(hotbarSlot);
+    hotbarSlot.addEventListener('click', () => {
+        socket.emit("hotbarClick", i);
+    })
+}
+
+    </script>
+
+</body>
+</html>
