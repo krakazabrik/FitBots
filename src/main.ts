@@ -52,7 +52,7 @@ class Main {
 
         Main.bot.on('message', (_jsonMsg: object) => {
             const serverMessage = _jsonMsg.toString()
-            if(serverMessage.includes('[☃] У Вас купили')) {
+            if(serverMessage.includes('[☃] У Вас куили')) {
                 InventoryModule.autoSell();
             }
             console.log(serverMessage);
