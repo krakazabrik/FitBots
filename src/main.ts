@@ -9,22 +9,37 @@ import { scripts } from "./modules/scripts.ts";
 class Main {
     private static bot: mineflayer.Bot;
     private static nick: string;
+    private static WebInventoryPort: string;
 
     public static async getNick() {
         Main.nick = await input.text("nick: ");
-        Main.nick.toString()
+    }
+
+    public static async getWebInventoryPort() {
+        console.log("Ожидание ввода порта...");
+        Main.WebInventoryPort = await input.text("web inventory port: ");
+        console.log("web inventory port: " + Main.WebInventoryPort)
+        // if(!Main.WebInventoryPort) {
+        //     console.log('web server is runing on default port 3001.');
+        // }
+        // if(Main.WebInventoryPort.lenght != 4) {
+        //     console.log('inventory port must me 4 charts');
+        //     return;
+        // }
     }
 
     public static async main() {
         await Main.getNick()
+        await Main.getWebInventoryPort()
         console.log("nick: " + Main.nick);
+        console.log("web inventory port: " + Main.WebInventoryPort)
 
         const botOptions = {
             host: "mc.spookytime.net",
             username: Main.nick,
             version: "1.18.2",
             port: 25565
-        };
+        }
 
         Main.bot = mineflayer.createBot(botOptions);
 
@@ -37,7 +52,7 @@ class Main {
         const scriptsModule = new scripts(Main.bot);
 
         Main.bot.once('spawn', () => {
-            webInventory(this.bot, {port: 3000});
+            webInventory(Main.bot, {port: 3001});
             InventoryModule.startInventory()
         });
 
