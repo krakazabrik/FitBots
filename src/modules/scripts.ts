@@ -6,9 +6,14 @@ export class scripts {
     }
 
     public async refreshItems() {
-        this.bot.clickWindow(52, 0, 0)
-        setInterval(() => {
-            this.bot.clickWindow(52, 0, 0);
-        }, 61000);
+        try {
+            this.bot.clickWindow(52, 0, 0)
+            setInterval(() => {
+                this.bot.clickWindow(52, 0, 0);
+            }, 61000);
+        } catch(error) {
+            console.log(error)
+        }
+  
     }
 }

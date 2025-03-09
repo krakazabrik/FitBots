@@ -52,16 +52,16 @@ class Main {
         const scriptsModule = new scripts(Main.bot);
 
         Main.bot.once('spawn', () => {
-            webInventory(Main.bot, {port: 3001});
-            InventoryModule.startInventory()
+            webInventory(Main.bot, { port: Number(Main.WebInventoryPort) });
+            InventoryModule.startInventory(Number(Main.WebInventoryPort) + 1);
         });
 
-        setInterval(() => {
-            InventoryModule.sortItems()
-        }, 60000);
+        // setInterval(() => {
+        //     InventoryModule.sortItems()
+        // }, 60000);
 
         Main.bot.on("chat", (username: string, message: string) => {
-
+        console.log(`${username}: ${message}`);
         });
 
 

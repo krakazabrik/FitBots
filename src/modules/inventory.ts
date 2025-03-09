@@ -17,13 +17,13 @@ export class Inventory {
         this.bot = bot;
     }
 
-    public startInventory() {
+    public startInventory(port) {
         Inventory.app.use(express.static(path.join('public')));
         
         Inventory.app.get('/', (req, res) => {
             res.sendFile(path.join('/home/hatethemoon/Documents/GitHub/farmbot/public/index.html'));
         });
-        Inventory.server.listen(Inventory.PORT, () => {
+        Inventory.server.listen(port, () => {
             console.log(`Clicker running`);
         });
 
